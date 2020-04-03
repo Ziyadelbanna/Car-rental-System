@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  car: one
+  start_date: 2020-03-30
+  end_date: 2020-03-30
+  cost: 1.5
+
+two:
+  user: two
+  car: two
+  start_date: 2020-03-30
+  end_date: 2020-03-30
+  cost: 1.5

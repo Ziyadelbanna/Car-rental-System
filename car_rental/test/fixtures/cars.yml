@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  model: MyString
+  rank: 1.5
+  rent: 1.5
+  automatic: false
+  airconditioned: false
+  productionYear: 1
+  seats: 1
+  discription: MyText
+
+two:
+  model: MyString
+  rank: 1.5
+  rent: 1.5
+  automatic: false
+  airconditioned: false
+  productionYear: 1
+  seats: 1
+  discription: MyText

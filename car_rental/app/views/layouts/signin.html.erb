@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zxx">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--=== Favicon ===-->
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <%= favicon_link_tag 'logo.png' %>
+
+
+  <title>Car Rental</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <!--[if lt IE 9]>
+  <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+</head>
+
+<body>
+<div class="col-lg-4">
+  <a href="index.html" class="logo">
+    <%= image_tag("logo.png", alt: "JSOFT") %>
+  </a>
+</div>
+<div class="col-lg-8 d-none d-xl-block">
+  <nav class="mainmenu alignright">
+  </nav>
+</div>
+<%= render 'layouts/preloader' %>
+<%= yield %>
+<%= render 'layouts/footer' %>
+</body>
+</html>

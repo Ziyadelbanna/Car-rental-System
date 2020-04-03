@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <title>Catalogue</title>
+</head>
+
+<body class="loader-active">
+
+<!--== Page Title Area Start ==-->
+<section id="page-title-area" class="section-padding overlay">
+  <div class="container">
+    <div class="row">
+      <!-- Page Title Start -->
+      <div class="col-lg-12">
+        <div class="section-title  text-center">
+          <h2>Our Cars</h2>
+          <span class="title-line"><i class="fa fa-car"></i></span>
+          <p>We are here for you.</p>
+        </div>
+      </div>
+      <!-- Page Title End -->
+    </div>
+  </div>
+</section>
+<!--== Page Title Area End ==-->
+
+<!--== Car List Area Start ==-->
+<section id="car-list-area" class="section-padding">
+  <div class="container">
+    <p id="notice"><%= notice %></p>
+    <% i = 0 %>
+    <% while i < @cars.length %>
+      <div class="row">
+        <!-- Car List Content Start -->
+        <div class="col-lg-12">
+          <div class="car-list-content">
+            <div class="row">
+              <!-- Single Car Start -->
+              <div class="col-lg-6 col-md-6">
+                <div class="single-car-wrap">
+                  <div class="car-list-thumb ">
+                    <%=image_tag(@cars[i].image) %>
+                  </div>
+                  <br>
+                  <div class="car-list-info without-bar">
+                    <h2><%= @cars[i].model %></h2>
+                    <h5><%= @cars[i].rent %>$ Rent /per a day</h5>
+                    <p><%= @cars[i].discription %></p>
+                    <ul class="car-info-list">
+                      <li>AC</li>
+                      <li>Auto</li>
+                      <li>Diesel</li>
+                    </ul>
+                    <p class="rating">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star unmark"></i>
+                    </p>
+                    <% if @cars[i].airconditioned %>
+
+                    <% else %>
+
+                    <% end %>
+
+                    <% if @cars[i].automatic %>
+                    <% else %>
+
+                    <% end %>
+                    <div class="row">
+                      <div class="col-sm-1"></div>
+                      <div class="col-sm-2">
+                        <%= link_to 'Details', @cars[i], class: "rent-btn" %>
+                      </div>
+                      <div class="col-sm-1"></div>
+                      <div class="col-sm-2">
+                        <%= link_to 'Edit', edit_car_path(@cars[i]), class: "rent-btn" %>
+                      </div>
+                      <div class="col-sm-1"></div>
+                      <div class="col-sm-2">
+                        <%= link_to 'Delete', @cars[i], method: :delete, data: {confirm: 'Are you sure?'}, class: "rent-btn" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% i += 1 %>
+              <!-- Single Car End -->
+              <% if i < @cars.length %>
+                <!-- Single Car Start -->
+                <div class="col-lg-6 col-md-6">
+                  <div class="single-car-wrap">
+                    <div class="car-list-thumb">
+                      <%=image_tag(@cars[i].image) %>
+                    </div>
+                    <br>
+                    <div class="car-list-info without-bar">
+                      <h2><%= @cars[i].model %></h2>
+                      <h5><%= @cars[i].rent %>$ Rent /per a day</h5>
+                      <p><%= @cars[i].discription %></p>
+                      <ul class="car-info-list">
+                        <li>AC</li>
+                        <li>Auto</li>
+                        <li>Diesel</li>
+                      </ul>
+                      <p class="rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star unmark"></i>
+                      </p>
+                      <% if @cars[i].airconditioned %>
+
+                      <% else %>
+
+                      <% end %>
+
+                      <% if @cars[i].automatic %>
+                      <% else %>
+
+                      <% end %>
+                      <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2">
+                          <%= link_to 'Details', @cars[i], class: "rent-btn" %>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2">
+                          <%= link_to 'Edit', edit_car_path(@cars[i]), class: "rent-btn" %>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-2">
+                          <%= link_to 'Delete', @cars[i], method: :delete, data: {confirm: 'Are you sure?'}, class: "rent-btn" %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Single Car End -->
+              <% end %>
+              <% i += 1 %>
+    <% end %>
+    </div>
+    </div>
+
+    <!-- Page Pagination Start -->
+    <div class="page-pagi">
+      <nav aria-label="Page navigation example">
+        <div class="row">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-4">
+            <%= will_paginate %>
+          </div>
+          <div class="col-sm-4"></div>
+        </div>
+      </nav>
+    </div>
+    <!-- Page Pagination End -->
+    </div>
+    <!-- Car List Content End -->
+    </div>
+  </div>
+</section>
+<!--== Car List Area End ==-->
+
+</body>
+
+</html>
