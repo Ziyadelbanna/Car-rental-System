@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
     user = User.find_by_email(login_params[:email])
     if user && user.password_hash == BCrypt::Engine.hash_secret(login_params[:password], BCrypt::Engine.generate_salt)
       session[:user_id] = user.id
-      redirect_to 'cars', :notice => "Logged in!"
+      redirect_to root_path, :notice => "Logged in!"
     else
       flash.now.alert = "Invalid email or password"
     end
