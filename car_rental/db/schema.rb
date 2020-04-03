@@ -87,7 +87,7 @@ ActiveRecord::Schema.define(version: 2020_03_30_165252) do
     t.date "dob", null: false
     t.integer "age", null: false
     t.integer "points", default: 0
-    t.boolean "admin", null: false
+    t.boolean "admin", default:0 ,null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
