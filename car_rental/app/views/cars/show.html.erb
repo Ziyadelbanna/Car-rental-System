@@ -32,7 +32,9 @@
           <h2><%= @car.model %> <span class="price">Rent: <b><%= @car.rent %>$</b></span></h2>
           <div>
             <div class="single-car-preview">
-              <%=image_tag(@car.image)%>
+              <% if @car.image.attached? %>
+                <%=image_tag(@car.image) %>
+              <%end %>
             </div>
           </div>
           <div class="car-details-info">

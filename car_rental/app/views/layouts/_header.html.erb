@@ -53,22 +53,11 @@
         <div class="col-lg-8 d-none d-xl-block">
           <nav class="mainmenu alignright">
             <ul>
-              <li><a href="#">Home</a>
-                <ul>
-                  <li><a href="index.html">Home 1</a></li>
-                  <li><a href="index2.html">Home 2</a></li>
-                  <li><a href="index3.html">Home 3</a></li>
-                </ul>
-              </li>
+              <li><%= link_to 'Home', root_path %></li>
+
               <li><a href="about.html">About</a></li>
               <li><a href="services.html">services</a></li>
-              <li><a href="#">Cars</a>
-                <ul>
-                  <li><%= link_to 'Car Left Sidebar', cars_path %></li>
-                  <li><%= link_to 'Car Right Sidebar', cars_path %></li>
-                  <li><%= link_to 'Car Without Sidebar', cars_path %></li>
-                  <li><%= link_to 'Car Details', cars_path %></li>
-                </ul>
+              <li><%= link_to 'Cars', cars_path %>
               </li>
               <li class="active"><a href="index.html">Pages</a>
                 <ul>
@@ -77,9 +66,6 @@
                   <li><a href="faq.html">FAQ</a></li>
                   <li><a href="gallery.html">Gallery</a></li>
                   <li><a href="help-desk.html">Help Desk</a></li>
-                  <li><a href="404.html">404</a></li>
-                  <li><%= link_to 'Login', 'go.html'%></li>
-                  <li><%= link_to 'Register', 'register'%></li>
                 </ul>
               </li>
               <li><a href="#">Blog</a>
@@ -89,13 +75,21 @@
                 </ul>
               </li>
               <li><a href="contact.html">Contact</a></li>
+              <%if logged_in? %>
 
+                <%if current_user.admin? %>
+                  <li><a href="#">Settings</a>
+                    <ul>
+                      <li><%= link_to 'Add new car', new_car_path %></li>
+                    </ul>
+                  </li>
+                <%end %>
 
-              <li><a href="#">Settings</a>
-                <ul>
-                  <li><%= link_to 'Add new car', new_car_path %></li>
-                </ul>
-              </li>
+                <li><%= link_to 'Logout', logout_path, method: :delete %></li>
+
+              <%else %>
+                <li><%= link_to 'Login', login_path%></li>
+            <%end %>
 
             </ul>
           </nav>

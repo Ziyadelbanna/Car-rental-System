@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-
+  before_action :require_same_user, only: [:edit, :update, :destroy, :show]
+  before_action :require_admin, only: [:destroy, :index]
   # GET /users
   # GET /users.json
   def index
@@ -28,6 +29,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        session[:user_id] = @user.id
+
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
@@ -71,4 +74,19 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:user_name, :password, :email, :name, :address, :dob, :age, :points, :admin)
     end
+
+  def require_same_user
+    if current_user != @user and !current_user.admin?
+      #flash[:danger] = 'You can only edit your own account'
+      redirect_to root_path
+    end
+  end
+
+  # this will prevent the non admin users from having access to destroy action
+  def require_admin
+    if logged_in? and !current_user.admin?
+      #flash[:danger] = 'Only admin users can perform that action'
+      redirect_to root_path
+    end
+  end
 end

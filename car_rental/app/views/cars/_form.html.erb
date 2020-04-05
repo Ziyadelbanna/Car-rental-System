@@ -1,16 +1,6 @@
+<%= render 'shared/errors' %>
+
 <%= form_with(model: car, local: true) do |form| %>
-  <% if car.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(car.errors.count, "error") %> prohibited this car from being saved:</h2>
-
-      <ul>
-        <% car.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
 
   <div class="field">
     <%= form.file_field :image %>
@@ -39,7 +29,7 @@
   </div>
 
   <div class="field">
-    <%= form.number_field :seats,class: "form-control",  autofocus: true, placeholder: "Number of seats..." %>
+    <%= form.number_field :seats,class:"form-control",  autofocus: true, placeholder: "Number of seats..." %>
   </div>
 
   <div class="row">
