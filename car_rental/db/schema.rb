@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_05_021209) do
+ActiveRecord::Schema.define(version: 2020_04_09_035249) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2020_04_05_021209) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "favourites", primary_key: ["user_id", "car_id"], options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+  create_table "favourites", primary_key: %w(user_id car_id), options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "car_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -78,6 +78,15 @@ ActiveRecord::Schema.define(version: 2020_04_05_021209) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
+  create_table "user_cars", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "car_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["car_id"], name: "index_user_cars_on_car_id"
+    t.index ["user_id"], name: "index_user_cars_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "user_name", limit: 25, null: false
     t.string "password_digest", null: false
@@ -87,7 +96,7 @@ ActiveRecord::Schema.define(version: 2020_04_05_021209) do
     t.date "dob", null: false
     t.integer "age", null: false
     t.integer "points", default: 0
-    t.boolean "admin", null: false
+    t.boolean "admin", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -99,4 +108,6 @@ ActiveRecord::Schema.define(version: 2020_04_05_021209) do
   add_foreign_key "rentals", "users"
   add_foreign_key "reviews", "cars"
   add_foreign_key "reviews", "users"
+  add_foreign_key "user_cars", "cars"
+  add_foreign_key "user_cars", "users"
 end

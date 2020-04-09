@@ -31,7 +31,7 @@ class UsersController < ApplicationController
       if @user.save
         session[:user_id] = @user.id
 
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to cars_path, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -40,12 +40,32 @@ class UsersController < ApplicationController
     end
   end
 
+  def my_saved
+    @favourites = current_user.cars
+  end
+
+  # this method handles the user favourite
+  def add_cars_to_favourite
+    @car = Car.find(params[:car])
+    # current_user.favourites.build(user_id:current_user.id,car_id: @car.id)
+    current_user.favourites.build(car_id: @car.id)
+
+    if current_user.save
+      flash[:notice] = 'car was successfully added'
+    else
+      flash[:danger] = 'There was something wrong with the car saving'
+    end
+    # redirect to the same page
+    redirect_back(fallback_location:"/")
+  end
+
+
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
+        format.html { redirect_to cars_path, notice: 'User was successfully updated.' }
         format.json { render :show, status: :ok, location: @user }
       else
         format.html { render :edit }

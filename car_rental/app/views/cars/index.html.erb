@@ -72,10 +72,19 @@
 
                     <% end %>
                     <div class="row">
-                      <div class="col-sm-1"></div>
                       <div class="col-sm-2">
                         <%= link_to 'Details', @cars[i], class: "rent-btn" %>
                       </div>
+                      <div class="col-sm-1"></div>
+                      <%if logged_in?%>
+                        <div class="col-sm-2">
+                          <% if current_user.car_not_saved?(@cars[i].id) %>
+                            <%= link_to "Save", save_car_path(user: current_user, car: @cars[i]), class: "rent-btn", method: :post %>
+                          <% else %>
+                            <%= link_to "Unsave", favourite_path(@cars[i]), method: :delete, class: "rent-btn" %>
+                          <% end %>
+                        </div>
+                      <%end %>
                       <div class="col-sm-1"></div>
                       <%if logged_in? && current_user.admin?%>
                         <div class="col-sm-2">
@@ -129,10 +138,20 @@
 
                       <% end %>
                       <div class="row">
-                        <div class="col-sm-1"></div>
                         <div class="col-sm-2">
                           <%= link_to 'Details', @cars[i], class: "rent-btn" %>
                         </div>
+                        <div class="col-sm-1"></div>
+                        <%if logged_in?%>
+                          <div class="col-sm-2">
+                            <% if current_user.car_not_saved?(@cars[i].id) %>
+                              <%= link_to "Save", save_car_path(user: current_user, car: @cars[i]), class: "rent-btn", method: :post %>
+                            <% else %>
+                              <%= link_to "Unsave", favourite_path(@cars[i]), method: :delete,
+                                          data: {confirm: "Are you sure?"}, class: "rent-btn" %>
+                            <% end %>
+                          </div>
+                        <%end %>
                         <div class="col-sm-1"></div>
                         <%if logged_in? && current_user.admin?%>
                           <div class="col-sm-2">
