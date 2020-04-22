@@ -1,7 +1,9 @@
 class User < ApplicationRecord
-  has_many :favourites
-  has_many :cars, through: :favourites
-  has_many :rentals, dependent: :destroy
+  has_many :saved_cars
+  has_many :savedcars, through: :saved_cars
+  has_many :rented_cars
+  has_many :rentedcars, through: :rented_cars
+#  has_many :rentals, dependent: :destroy
   has_many :reviews
 
   validates :user_name, presence: true, length: {minimum: 3, maximum: 25}, uniqueness: {case_sensitive: false}
@@ -20,6 +22,12 @@ class User < ApplicationRecord
 
   def car_not_saved?(car_id)
     # if count is < 1 means that the count is zero so it isn't saved
-    favourites.where(car_id: car_id).count < 1
+    saved_cars.where(savedcar_id: car_id).count < 1
   end
+
+  def car_not_rented?(car_id)
+    # if count is < 1 means that the count is zero so it isn't saved
+    rented_cars.where(rentedcar_id: car_id).count < 1
+  end
+
 end

@@ -20,7 +20,7 @@ class CarsTest < ApplicationSystemTestCase
     fill_in "Model", with: @car.model
     fill_in "Productionyear", with: @car.productionYear
     fill_in "Rank", with: @car.rank
-    fill_in "Rent", with: @car.rent
+    fill_in "RentedCar", with: @car.rent
     fill_in "Seats", with: @car.seats
     click_on "Create Car"
 
@@ -38,7 +38,7 @@ class CarsTest < ApplicationSystemTestCase
     fill_in "Model", with: @car.model
     fill_in "Productionyear", with: @car.productionYear
     fill_in "Rank", with: @car.rank
-    fill_in "Rent", with: @car.rent
+    fill_in "RentedCar", with: @car.rent
     fill_in "Seats", with: @car.seats
     click_on "Update Car"
 
