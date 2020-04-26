@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_22_114341) do
+ActiveRecord::Schema.define(version: 2020_04_25_050515) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "name", null: false
@@ -73,11 +73,11 @@ ActiveRecord::Schema.define(version: 2020_04_22_114341) do
   create_table "rented_cars", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "rentedcar_id"
-    t.bigint "credit_card_no", null: false
-    t.integer "cvc", null: false
-    t.date "credit_expired_date", null: false
-    t.date "rent_from_date", null: false
-    t.date "rent_to_date", null: false
+    t.bigint "credit_card_no", default: 0, null: false
+    t.integer "cvc", default: 0, null: false
+    t.date "credit_expired_date", default: "2020-04-09", null: false
+    t.date "rent_from_date", default: "2020-04-09", null: false
+    t.date "rent_to_date", default: "2020-04-09", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["rentedcar_id"], name: "index_rented_cars_on_rentedcar_id"

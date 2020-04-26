@@ -10,6 +10,9 @@ Rails.application.routes.draw do
   get 'saved', to: 'users#my_saved'
   post 'save_car', to: 'users#add_cars_to_favourite'
 
+  get 'search', to: 'cars#search'
+
+
   get 'rented', to: 'users#my_rented'
   post 'rent_car', to: 'users#add_cars_to_rent'
 

@@ -65,17 +65,17 @@ class UsersController < ApplicationController
 
   def add_cars_to_rent
 
-    # @car = User.find(params[:rentedcar])
-    # current_user.rented_cars.build(rentedcar_id: @car.id)
-    #
-    # if current_user.save
-    #   flash[:notice] = 'car was successfully rented'
-    # else
-    #   flash[:danger] = 'There was something wrong with the car renting'
-    # end
-    # # redirect to the same page
-    # redirect_back(fallback_location:"/")
-    redirect_to new_rented_car_path
+    @car = User.find(params[:rentedcar])
+    current_user.rented_cars.build(rentedcar_id: @car.id)
+
+    if current_user.save
+      flash[:notice] = 'car was successfully rented'
+    else
+      flash[:danger] = 'There was something wrong with the car renting'
+    end
+    # redirect to the same page
+    redirect_back(fallback_location:"/")
+    # redirect_to new_rented_car_path
   end
 
 

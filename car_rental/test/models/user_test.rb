@@ -7,7 +7,7 @@ class UserTest < ActiveSupport::TestCase
 
 
   def setup
-    @user = User.new(user_name: "Sarah", password_digest: "sarah_1",email: "sarah@gmail.com", name: "sarah", address: "Damanhour",  dob: "2020-1-1", age: 23, points:1 )
+    @user = User.new(user_name: "Sarah", password_digest: "sarah_1",email: "sarah@gmail.com", name: "sarah", address: "Damanhour",  dob: "2020-1-1", age: 23, points:1)
   end
 
   test "user should be valid" do
@@ -83,6 +83,5 @@ class UserTest < ActiveSupport::TestCase
   test "points should not be negative" do
     assert_operator @user.points, :>=, 0.0
   end
-
 
 end

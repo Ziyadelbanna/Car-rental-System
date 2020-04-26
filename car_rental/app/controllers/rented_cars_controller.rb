@@ -24,9 +24,13 @@ class RentedCarsController < ApplicationController
   # POST /rented_cars
   # POST /rented_cars.json
   def create
+    # @car = Car.new
+    # @car =current_user.rentedcars
+    # @RentedCar.rentedcar_id = RentedCar.find(params[:rentedcar_id]).id
+
     @rented_car = RentedCar.new(rented_car_params)
     @rented_car.user_id = current_user.id
-    @car = User.find(params[:rentedcar])
+    @rented_car.rentedcar_id = @car.id
 
 
     respond_to do |format|
@@ -57,15 +61,11 @@ class RentedCarsController < ApplicationController
   # DELETE /rented_cars/1
   # DELETE /rented_cars/1.json
   def destroy
-    # @rented_car.destroy
-    # respond_to do |format|
-    #   format.html { redirect_to rented_cars_url, notice: 'Rented car was successfully destroyed.' }
-    #   format.json { head :no_content }
-    # end
-
-    @rented_car = current_user.saved_cars.where(rentedcar_id: params[:id]).first
     @rented_car.destroy
-    redirect_back(fallback_location: '/')
+    respond_to do |format|
+      format.html { redirect_to rented_cars_url, notice: 'Rented car was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   private
