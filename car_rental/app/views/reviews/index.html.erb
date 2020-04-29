@@ -18,10 +18,11 @@
       <tr>
         <td><%= review.user_id %></td>
         <td><%= review.car_id %></td>
-        <td><%= review.rank %></td>
+        <td><div class="star-rating" data-score= <%= review.rank %> ></div></td>
+<!--        <td><%#= review.rank %></td>-->
         <td><%= review.content %></td>
-        <td><%= link_to 'Show', review %></td>
-        <td><%= link_to 'Edit', edit_review_path(review) %></td>
+        <td><%= link_to 'Show', car_review_path(review) %></td>
+        <td><%= link_to 'Edit', edit_car_review_path(review) %></td>
         <td><%= link_to 'Destroy', review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -31,3 +32,14 @@
 <br>
 
 <%= link_to 'New Review', new_review_path %>
+
+
+<script>
+    $('.star-rating').raty({
+        path: '/assets/',
+        readOnly: true,
+        score: function() {
+            return $(this).attr('data-score');
+        }
+    });
+</script>

@@ -41,14 +41,24 @@
                 <div class="single-car-wrap">
                   <div class="car-list-thumb ">
                     <% if @cars[i].image.attached? %>
-                     <%=image_tag(@cars[i].image) %>
-                    <%end %>
+                      <%= image_tag(@cars[i].image) %>
+                    <% end %>
 
                   </div>
                   <br>
                   <div class="car-list-info without-bar">
                     <br>
-                    <h2><%= @cars[i].model %></h2>
+                    <div class="row">
+                      <div class="col-sm-9">
+                        <h2><%= @cars[i].model %></h2>
+                      </div>
+                      <div class="col-sm-3">
+                        <p class="rating">
+                          <%@cars[i].calculate_car_rate(@cars[i].id)%>
+                          <div class="star-rating" data-score=<%= @cars[i].rank.ceil %>></div>
+                        </p>
+                      </div>
+                    </div>
                     <h5><%= @cars[i].rent %>$ Rent /per a day</h5>
                     <p><%= @cars[i].discription %></p>
                     <ul class="car-info-list">
@@ -56,13 +66,7 @@
                       <li>Auto</li>
                       <li>Diesel</li>
                     </ul>
-                    <p class="rating">
-                      <i class="fa fa-star unmark"></i>
-                      <i class="fa fa-star unmark"></i>
-                      <i class="fa fa-star unmark"></i>
-                      <i class="fa fa-star unmark"></i>
-                      <i class="fa fa-star unmark"></i>
-                    </p>
+
                     <% if @cars[i].airconditioned %>
 
                     <% else %>
@@ -77,8 +81,8 @@
                       <div class="col-sm-2">
                         <%= link_to 'Details', @cars[i], class: "rent-btn" %>
                       </div>
-<!--                      <div class="col-sm-1"></div>-->
-                      <%if logged_in?%>
+                      <!--                      <div class="col-sm-1"></div>-->
+                      <% if logged_in? %>
                         <div class="col-sm-2">
                           <% if current_user.car_not_saved?(@cars[i].id) %>
                             <%= link_to "Save", save_car_path(user: current_user, savedcar: @cars[i]), class: "rent-btn", method: :post %>
@@ -88,26 +92,26 @@
                         </div>
                         <div class="col-sm-2">
                           <% if current_user.car_not_rented?(@cars[i].id) %>
-                            <%#= link_to "Rent", rent_car_path(user: current_user, rentedcar: @cars[i]), class: "rent-btn", method: :post %>
-                            <%= link_to "Rent", new_rented_car_path(rentedcar: @cars[i]), class: "rent-btn" %>
-                            <%#= link_to "Rent", new_rented_car_path, class: "rent-btn" %>
-                        <% else %>
+                            <!-- saving the car in the browser session hash-->
+                            <% session[:car_id] = @cars[i].id %>
+                            <%= link_to "Rent", new_rented_car_path(@cars[i]), class: "rent-btn" %>
+                          <% else %>
                             <%= link_to "Cancel", rented_car_path(@cars[i]), method: :delete, class: "rent-btn" %>
                           <% end %>
                         </div>
 
 
-                      <%end %>
-<!--                      <div class="col-sm-1"></div>-->
-                      <%if logged_in? && current_user.admin?%>
+                      <% end %>
+                      <!--                      <div class="col-sm-1"></div>-->
+                      <% if logged_in? && current_user.admin? %>
                         <div class="col-sm-2">
                           <%= link_to 'Edit', edit_car_path(@cars[i]), class: "rent-btn" %>
                         </div>
-<!--                        <div class="col-sm-1"></div>-->
+                        <!--                        <div class="col-sm-1"></div>-->
                         <div class="col-sm-2">
                           <%= link_to 'Delete', @cars[i], method: :delete, data: {confirm: 'Are you sure?'}, class: "rent-btn" %>
                         </div>
-                      <%end %>
+                      <% end %>
                     </div>
                   </div>
                 </div>
@@ -120,14 +124,24 @@
                   <div class="single-car-wrap">
                     <div class="car-list-thumb">
                       <% if @cars[i].image.attached? %>
-                        <%=image_tag(@cars[i].image) %>
-                      <%end %>
+                        <%= image_tag(@cars[i].image) %>
+                      <% end %>
 
                     </div>
                     <br>
                     <div class="car-list-info without-bar">
                       <br>
-                      <h2><%= @cars[i].model %></h2>
+                      <div class="row">
+                        <div class="col-sm-9">
+                          <h2><%= @cars[i].model %></h2>
+                        </div>
+                        <div class="col-sm-3">
+                          <p class="rating">
+                            <%@cars[i].calculate_car_rate(@cars[i].id)%>
+                            <div class="star-rating" data-score=<%= @cars[i].rank.ceil %>></div>
+                          </p>
+                        </div>
+                      </div>
                       <h5><%= @cars[i].rent %>$ Rent /per a day</h5>
                       <p><%= @cars[i].discription %></p>
                       <ul class="car-info-list">
@@ -135,13 +149,6 @@
                         <li>Auto</li>
                         <li>Diesel</li>
                       </ul>
-                      <p class="rating">
-                        <i class="fa fa-star unmark"></i>
-                        <i class="fa fa-star unmark"></i>
-                        <i class="fa fa-star unmark"></i>
-                        <i class="fa fa-star unmark"></i>
-                        <i class="fa fa-star unmark"></i>
-                      </p>
                       <% if @cars[i].airconditioned %>
 
                       <% else %>
@@ -156,8 +163,8 @@
                         <div class="col-sm-2">
                           <%= link_to 'Details', @cars[i], class: "rent-btn" %>
                         </div>
-<!--                        <div class="col-sm-1"></div>-->
-                        <%if logged_in?%>
+                        <!--                        <div class="col-sm-1"></div>-->
+                        <% if logged_in? %>
                           <div class="col-sm-2">
                             <% if current_user.car_not_saved?(@cars[i].id) %>
                               <%= link_to "Save", save_car_path(user: current_user, savedcar: @cars[i]), class: "rent-btn", method: :post %>
@@ -168,24 +175,25 @@
 
                           <div class="col-sm-2">
                             <% if current_user.car_not_rented?(@cars[i].id) %>
-                              <%#= link_to "Rent", rent_car_path(user: current_user, rentedcar: @cars[i]), class: "rent-btn", method: :post %>
-                              <%= link_to "Rent", new_rented_car_path(rentedcar: @cars[i]), class: "rent-btn" %>
+                              <!-- saving the car in the browser session hash-->
+                              <% session[:car_id] = @cars[i].id %>
+                              <%= link_to "Rent", new_rented_car_path(@cars[i]), class: "rent-btn" %>
 
-                          <% else %>
-                              <%= link_to "Cancel", rented_car_path(@cars[i]), method: :delete, class: "rent-btn" %>
+                            <% else %>
+                              <%= link_to "Cancel", rented_cars_path(@cars[i]), method: :delete, class: "rent-btn" %>
                             <% end %>
                           </div>
-                        <%end %>
-<!--                        <div class="col-sm-1"></div>-->
-                        <%if logged_in? && current_user.admin?%>
+                        <% end %>
+                        <!--                        <div class="col-sm-1"></div>-->
+                        <% if logged_in? && current_user.admin? %>
                           <div class="col-sm-2">
                             <%= link_to 'Edit', edit_car_path(@cars[i]), class: "rent-btn" %>
                           </div>
-<!--                          <div class="col-sm-1"></div>-->
+                          <!--                          <div class="col-sm-1"></div>-->
                           <div class="col-sm-2">
                             <%= link_to 'Delete', @cars[i], method: :delete, data: {confirm: 'Are you sure?'}, class: "rent-btn" %>
                           </div>
-                        <%end %>
+                        <% end %>
                       </div>
                     </div>
                   </div>
@@ -220,3 +228,15 @@
 </body>
 
 </html>
+
+
+
+<script>
+    $('.star-rating').raty({
+        path: '/assets/',
+        readOnly: true,
+        score: function () {
+            return $(this).attr('data-score');
+        }
+    });
+</script>

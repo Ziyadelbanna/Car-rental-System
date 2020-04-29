@@ -1,5 +1,6 @@
 class RentedCarsController < ApplicationController
   before_action :set_rented_car, only: [:show, :edit, :update, :destroy]
+  before_action :set_car
 
   # GET /rented_cars
   # GET /rented_cars.json
@@ -14,7 +15,10 @@ class RentedCarsController < ApplicationController
 
   # GET /rented_cars/new
   def new
-    @rented_car = RentedCar.new
+    # means that the current user is the one who will make the rent
+    @rented_car = current_user.rented_cars.build
+    #@rented_car = RentedCar.new
+
   end
 
   # GET /rented_cars/1/edit
@@ -24,24 +28,23 @@ class RentedCarsController < ApplicationController
   # POST /rented_cars
   # POST /rented_cars.json
   def create
-    # @car = Car.new
-    # @car =current_user.rentedcars
-    # @RentedCar.rentedcar_id = RentedCar.find(params[:rentedcar_id]).id
+    #@rented_car = RentedCar.new(rented_car_params)
+    @rented_car = current_user.rented_cars.build(rented_car_params)
+    #@rented_car.user_id = current_user.id
+    @rented_car.car_id = current_rented_car.id
 
-    @rented_car = RentedCar.new(rented_car_params)
-    @rented_car.user_id = current_user.id
-    @rented_car.rentedcar_id = @car.id
-
-
-    respond_to do |format|
-      if @rented_car.save
-        format.html { redirect_to @rented_car, notice: 'Rented car was successfully created.' }
-        format.json { render :show, status: :created, location: @rented_car }
-      else
-        format.html { render :new }
-        format.json { render json: @rented_car.errors, status: :unprocessable_entity }
-      end
+    #respond_to do |format|
+    if @rented_car.save
+      # format.html { redirect_to @rented_car, notice: 'Rented car was successfully created.' }
+      # format.json { render :show, status: :created, location: @rented_car }
+      #redirect_to @rented_car
+      redirect_to cars_path
+    else
+      # format.html { render :new }
+      # format.json { render json: @rented_car.errors, status: :unprocessable_entity }
+      render 'new'
     end
+    #end
   end
 
   # PATCH/PUT /rented_cars/1
@@ -74,9 +77,13 @@ class RentedCarsController < ApplicationController
       @rented_car = RentedCar.find(params[:id])
     end
 
+    def set_car
+      @car = Car.find(params[:car_id])
+    end
+
     # Only allow a list of trusted parameters through.
     def rented_car_params
       #params.fetch(:rented_car, {})
-      params.require(:rented_car).permit(:credit_card_no, :cvc, :credit_expired_date, :rent_from_date, :rent_to_date)
+      params.require(:rented_car).permit(:user_id, :car_id,:credit_card_no, :cvc, :credit_expired_date, :rent_from_date, :rent_to_date)
     end
 end

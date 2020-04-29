@@ -8,8 +8,7 @@ class SavedCarTest < ActiveSupport::TestCase
 
   def setup
     @saved_car = SavedCar.new(user_id: 3, savedcar_id: 3)
-    @user = User.new(user_name: "Sarah", password_digest: "sarah_1",email: "sarah@gmail.com", name: "sarah", address: "Damanhour",  dob: "2020-1-1", age: 23, points:1)
-    @car = cars(:one)
+
   end
 
   test "favourite should not be valid" do

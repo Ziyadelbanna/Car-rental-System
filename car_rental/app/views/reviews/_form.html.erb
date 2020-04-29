@@ -1,10 +1,17 @@
-<%= form_with(model: review, local: true) do |form| %>
-  <% if review.errors.any? %>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<%= form_for([ @car,@review]) do |form| %>
+  <% if @review.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
 
       <ul>
-        <% review.errors.full_messages.each do |message| %>
+        <% @review.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -23,7 +30,8 @@
 
   <div class="field">
     <%= form.label :rank %>
-    <%= form.number_field :rank %>
+    <div id="star-rating">
+    </div>
   </div>
 
   <div class="field">
@@ -35,3 +43,22 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+<!--<script>-->
+<!--    $('.star-rating').raty({-->
+<!--        path: '/assets/',-->
+<!--        click: true,-->
+<!--        hints: ['bad', 'poor', 'regular', 'good', 'gorgeous'],-->
+<!--        score: function() {-->
+<!--            return $(this).attr('data-score');-->
+<!--        }-->
+<!--    });-->
+<!--</script>-->
+
+<script>
+    $('#star-rating').raty({
+        path: '/assets/',
+        hints: ['bad', 'poor', 'regular', 'good', 'gorgeous'],
+        scoreName: 'review[rank]'
+    });
+</script>

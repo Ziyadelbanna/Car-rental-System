@@ -20,9 +20,10 @@
     <%= form.text_field :discription,class: "form-control",  autofocus: true, placeholder: "Description..." %>
   </div>
 
-  <div class="field">
-    <%= form.text_field :rank,class: "form-control",  autofocus: true, placeholder: "Rank..." %>
-  </div>
+<!--  <div class="field">-->
+    <%#= form.text_field :rank,class: "form-control",  autofocus: true, placeholder: "Rank..." %>
+<!--    <div id="star-rating"></div>-->
+<!--  </div>-->
 
   <div class="field">
     <%= form.text_area :rent,class: "form-control",  autofocus: true, placeholder: "RentedCar..." %>
@@ -61,3 +62,12 @@
   </div>
 
 <% end %>
+
+
+<!--<script>-->
+<!--    $('#star-rating').raty({-->
+<!--        path: '/assets/',-->
+<!--        hints: ['bad', 'poor', 'regular', 'good', 'gorgeous'],-->
+<!--        scoreName: 'car[ranking]'-->
+<!--    });-->
+<!--</script>-->

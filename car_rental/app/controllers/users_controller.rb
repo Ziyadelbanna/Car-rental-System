@@ -44,9 +44,9 @@ class UsersController < ApplicationController
     @saved_cars = current_user.savedcars
   end
 
-  def my_rented
-    @rented_cars = current_user.rentedcars
-  end
+  # def my_rented
+  #   @rented_cars = current_user.rentedcars
+  # end
 
   # this method handles the user favourite
   def add_cars_to_favourite
@@ -63,20 +63,20 @@ class UsersController < ApplicationController
     redirect_back(fallback_location:"/")
   end
 
-  def add_cars_to_rent
-
-    @car = User.find(params[:rentedcar])
-    current_user.rented_cars.build(rentedcar_id: @car.id)
-
-    if current_user.save
-      flash[:notice] = 'car was successfully rented'
-    else
-      flash[:danger] = 'There was something wrong with the car renting'
-    end
-    # redirect to the same page
-    redirect_back(fallback_location:"/")
-    # redirect_to new_rented_car_path
-  end
+  # def add_cars_to_rent
+  #
+  #   @car = User.find(params[:rentedcar])
+  #   current_user.rented_cars.build(rentedcar_id: @car.id)
+  #
+  #   if current_user.save
+  #     flash[:notice] = 'car was successfully rented'
+  #   else
+  #     flash[:danger] = 'There was something wrong with the car renting'
+  #   end
+  #   # redirect to the same page
+  #   redirect_back(fallback_location:"/")
+  #   # redirect_to new_rented_car_path
+  # end
 
 
   # PATCH/PUT /users/1
