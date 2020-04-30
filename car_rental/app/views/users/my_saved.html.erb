@@ -48,8 +48,17 @@
                       <div class="display-table">
                         <div class="display-table-cell">
                           <div class="car-list-info">
-
-                            <h2> <%= car.model %></h2>
+                            <div class="row">
+                              <div class="col-sm-8">
+                                <h3><%= car.model %></h3>
+                              </div>
+                              <div class="col-sm-4">
+                                <p class="rating">
+                                  <% car.calculate_car_rate(car.id) %>
+                                <div class="star-rating" data-score=<%= car.rank.ceil %>></div>
+                                </p>
+                              </div>
+                            </div>
                             <h5><%= car.rent %>$ Rent /per a day</h5>
                             <p><%= car.discription %></p>
                             <ul class="car-info-list">
@@ -58,14 +67,6 @@
                               <li>Auto</li>
                             </ul>
 
-                            <p class="rating">
-
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star unmark"></i>
-                            </p>
                             <!--to delete the recipe from the saved-->
                             <%= link_to "Unsave", saved_car_path(car), method: :delete, class: "rent-btn" %>
                           </div>
@@ -206,4 +207,13 @@
 
 
 
+<script>
+    $('.star-rating').raty({
+        path: '/assets/',
+        readOnly: true,
+        score: function () {
+            return $(this).attr('data-score');
+        }
+    });
+</script>
 

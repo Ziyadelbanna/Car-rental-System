@@ -1,25 +1,124 @@
-<p id="notice"><%= notice %></p>
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<body class="loader-active">
+<!--== Page Title Area Start ==-->
+<section id="page-title-area" class="section-padding overlay">
+  <div class="container">
+    <div class="row">
+      <!-- Page Title Start -->
+      <div class="col-lg-12">
+        <div class="section-title  text-center">
+          <h2>Rented Cars</h2>
+          <span class="title-line"><i class="fa fa-car"></i></span>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        </div>
+      </div>
+      <!-- Page Title End -->
+    </div>
+  </div>
+</section>
+<!--== Page Title Area End ==-->
 
-<h1>Rented Cars</h1>
+<!--== Car List Area Start ==-->
+<section id="car-list-area" class="section-padding">
+  <div class="container">
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @rented_cars.each do |rented_car| %>
-      <tr>
-        <td><%= link_to 'Show', rented_car %></td>
-        <td><%= link_to 'Edit', edit_rented_car_path(rented_car) %></td>
-        <td><%= link_to 'Destroy', rented_car, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+    <div class="row">
+      <!-- Car List Content Start -->
+      <div class="col-lg-12">
+        <div class="car-list-content">
+          <% i = 0 %>
+          <% while i < @rented_cars.length %>
+            <% @car = Car.find(@rented_cars[i].car_id) %>
+            <% @user = User.find(@rented_cars[i].user_id) %>
+            <!-- Single Car Start -->
+            <div class="single-car-wrap">
+              <div class="row">
+                <!-- Single Car Thumbnail -->
+                <div class="col-lg-5">
+                  <div class="car-list-thumb">
+                    <% if @car.image.attached? %>
+                      <%= image_tag(@car.image) %>
+                    <% end %>
+                  </div>
+                </div>
+                <!-- Single Car Thumbnail -->
 
-<br>
+                <!-- Single Car Info -->
+                <div class="col-lg-7">
+                  <div class="display-table">
+                    <div class="display-table-cell">
+                      <div class="car-list-info">
+                        <div class="row">
+                          <div class="col-sm-9">
+                            <h2><%= @car.model %></h2>
+                          </div>
+                          <div class="col-sm-3">
+                            <p class="rating">
+                              <% @car.calculate_car_rate(@car.id) %>
+                            <div class="star-rating" data-score=<%= @car.rank.ceil %>></div>
+                            </p>
+                          </div>
+                        </div>
+                        <h5><%= @car.rent %>$ Rent /per a day</h5>
+                        <p><%= @car.discription %></p>
+                        <ul class="car-info-list">
+                          <li>By: <%= @user.user_name %></li>
+                          <li>From: <%= @rented_cars[i].rent_from_date %></li>
+                          <li>To: <%= @rented_cars[i].rent_to_date %></li>
+                        </ul>
 
-<%= link_to 'New Rented Car', new_rented_car_path %>
+                        <div class="row">
+                          <!--                       <div class="col-sm-2">-->
+                          <%#= link_to 'Show', rented_car , class: "rent-btn"%>
+                          <!--                       </div>-->
+<!--                          <div class="col-sm-2">-->
+                            <%#= link_to 'Edit', edit_rented_car_path(:id =>@rented_cars[i].id), class: "rent-btn" %>
+<!--                          </div>-->
+                          <div class="col-sm-2">
+                            <%= link_to 'Destroy', delete_path(:id =>@rented_cars[i].id), method: :delete, class: "rent-btn", data: {confirm: 'Are you sure?'} %>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Single Car info -->
+              </div>
+            </div>
+            <!-- Single Car End -->
+            <% i += 1 %>
+          <% end %>
+        </div>
+        <!-- Page Pagination Start -->
+        <div class="page-pagi">
+          <nav aria-label="Page navigation example">
+            <div class="row">
+              <div class="col-sm-4"></div>
+              <div class="col-sm-4">
+                <%= will_paginate %>
+              </div>
+              <div class="col-sm-4"></div>
+            </div>
+          </nav>
+        </div>
+        <!-- Page Pagination End -->
+      </div>
+    </div>
+  </div>
+</section>
+<!--== Car List Area End ==-->
+</body>
+</html>
+
+
+<script>
+    $('.star-rating').raty({
+        path: '/assets/',
+        readOnly: true,
+        score: function () {
+            return $(this).attr('data-score');
+        }
+    });
+</script>

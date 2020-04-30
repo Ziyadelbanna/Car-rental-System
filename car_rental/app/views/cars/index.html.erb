@@ -93,8 +93,8 @@
                         <div class="col-sm-2">
                           <% if current_user.car_not_rented?(@cars[i].id) %>
                             <!-- saving the car in the browser session hash-->
-                            <% session[:car_id] = @cars[i].id %>
-                            <%= link_to "Rent", new_rented_car_path(@cars[i]), class: "rent-btn" %>
+                            <%logger.info "car id =: #{@cars[i].id}" %>
+                            <%= link_to "Rent", rented_cars_new_path(:car_id =>@cars[i].id),:method => :post, class: "rent-btn" %>
                           <% else %>
                             <%= link_to "Cancel", rented_car_path(@cars[i]), method: :delete, class: "rent-btn" %>
                           <% end %>
@@ -176,11 +176,11 @@
                           <div class="col-sm-2">
                             <% if current_user.car_not_rented?(@cars[i].id) %>
                               <!-- saving the car in the browser session hash-->
-                              <% session[:car_id] = @cars[i].id %>
-                              <%= link_to "Rent", new_rented_car_path(@cars[i]), class: "rent-btn" %>
-
+                              <%#logger.info "car id =: #{@cars[i].id}" %>
+                              <%= link_to "Rent", rented_cars_new_path(:car_id =>@cars[i].id),:method => :post, class: "rent-btn" %>
+                              <%#logger.info "car id =: #{session[:rentedcar_id]}" %>
                             <% else %>
-                              <%= link_to "Cancel", rented_cars_path(@cars[i]), method: :delete, class: "rent-btn" %>
+                              <%= link_to "Cancel", rented_car_path(@cars[i]), method: :delete, class: "rent-btn" %>
                             <% end %>
                           </div>
                         <% end %>

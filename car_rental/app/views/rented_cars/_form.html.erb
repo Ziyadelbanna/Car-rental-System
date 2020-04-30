@@ -1,15 +1,5 @@
-<%= form_with(model: rented_car, local: true) do |form| %>
-  <% if rented_car.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(rented_car.errors.count, "error") %> prohibited this rented_car from being saved:</h2>
-
-      <ul>
-        <% rented_car.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= render 'shared/errors', object:@rented_car %>
+<%= form_for(@rented_car, local: true) do |form| %>
 
     <div class="field">
       <%= form.text_field :credit_card_no,class: "form-control",  autofocus: true, placeholder: "Credit Card Number" %>
@@ -22,17 +12,17 @@
 
     <div class="field">
       <h6>Card Expired Date:</h6>
-      <%= form.date_field  :credit_expired_date ,class:"form-control",  autofocus: true, placeholder: "Card Expired Date" %>
+      <%= form.date_field  :credit_expired_date ,class:"form-control",  autofocus: true, placeholder: "Card Expired Date" , min: Date.today%>
     </div>
 
     <div class="field">
       <h6>Rent From:</h6>
-      <%= form.date_field  :rent_from_date ,class:"form-control",  autofocus: true, placeholder: "From" %>
+      <%= form.date_field  :rent_from_date ,class:"form-control",  autofocus: true, placeholder: "From" , min: Date.today%>
     </div>
 
     <div class="field">
       <h6>Rent To:</h6>
-      <%= form.date_field  :rent_to_date ,class:"form-control",  autofocus: true, placeholder: "To" %>
+      <%= form.date_field  :rent_to_date ,class:"form-control",  autofocus: true, placeholder: "To" , min: Date.today%>
     </div>
 
 
@@ -41,7 +31,7 @@
       </div>
       <div class="col-sm-6">
         <div class="log-btn">
-          <%= form.submit "Rent",class: "btn" %>
+          <%= form.submit "Done",class: "btn" %>
         </div>
       </div>
     </div>

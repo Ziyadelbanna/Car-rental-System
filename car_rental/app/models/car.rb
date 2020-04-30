@@ -4,7 +4,7 @@ class Car < ApplicationRecord
 	has_many :rented_cars, dependent: :destroy
 	has_one_attached :image
 
-	has_many :users, through: :rented_cars
+	#has_many :users, through: :rented_cars
 
 	# the cars that the user saved
 	has_many :user_cars
@@ -48,12 +48,11 @@ class Car < ApplicationRecord
 			# calculate avg
 			reviews_counter = (reviews_counter / valid_reviews)
 		end
-
 		car = Car.find(car_id)
 		car.rank = reviews_counter
 		car.save
-
 	end
+
 
 
 	private

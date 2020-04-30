@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :savedcars, through: :saved_cars
   has_many :rented_cars, dependent: :destroy
 
-  has_many :cars, through: :rented_cars
+  # has_many :cars, through: :rented_cars
   # has_many :rentedcars, through: :rented_cars
 #  has_many :rentals, dependent: :destroy
   has_many :reviews, dependent: :destroy

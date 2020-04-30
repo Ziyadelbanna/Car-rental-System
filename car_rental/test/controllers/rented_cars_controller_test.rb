@@ -22,11 +22,11 @@
 #
 #     assert_redirected_to rented_car_url(RentedCar.last)
 #   end
-#
-#   test "should show rented_car" do
-#     get rented_car_url(@rented_car)
-#     assert_response :success
-#   end
+#   #
+#   # test "should show rented_car" do
+#   #   get rented_car_url(@rented_car)
+#   #   assert_response :success
+#   # end
 #
 #   test "should get edit" do
 #     get edit_rented_car_url(@rented_car)
