@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <title>Catalogue</title>
+</head>
+
+<body class="loader-active">
+
+<!--== Page Title Area Start ==-->
+<section id="page-title-area" class="section-padding overlay">
+  <div class="container">
+    <div class="row">
+      <!-- Page Title Start -->
+      <div class="col-lg-12">
+        <div class="section-title  text-center">
+          <h2><%= @car_model%></h2>
+          <span class="title-line"><i class="fa fa-car"></i></span>
+          <p>We are here for you.</p>
+        </div>
+      </div>
+      <!-- Page Title End -->
+    </div>
+  </div>
+</section>
+<!--== Page Title Area End ==-->
+
+<!--== Rentals Statistics Table Start ==-->
+<br>
+<h1>Rentals Statistics</h1>
+<br>
+<table class="table">
+
+  <thead>
+    <tr>
+      <th scope="col">Username</th>
+      <th scope="col">Age</th>
+      <th scope="col">Rental Days</th>
+      <th scope="col">Total Income</th>
+  </tr>
+  </thead>
+
+<% (0 .. @r_username.length-1).each do |i|  %>
+  <tbody>
+    <tr>
+      <th scope="row"><%= @r_username[i] %></th>
+      <td><%= @r_age[i] %></td>
+      <td><%= @r_days[i] %></td>
+      <td><%= @r_income[i] %></td>
+    </tr>
+  </tbody>
+<% end %>
+</table>
+<!--== Rentals Statistics Table End ==-->
+
+
+<!--== Favourites Statistics Table Start ==-->
+<br>
+<br>
+<br>
+<br>
+<h1>Favourites Statistics</h1>
+<br>
+<table class="table">
+
+  <thead>
+    <tr>
+      <th scope="col">Username</th>
+      <th scope="col">Age</th>
+      <th scope="col">Date</th>
+  </tr>
+  </thead>
+
+<% (0 .. @f_username.length-1).each do |i|  %>
+  <tbody>
+    <tr>
+      <th scope="row"><%= @f_username[i] %></th>
+      <td><%= @f_age[i] %></td>
+      <td><%= @f_date[i] %></td>
+    </tr>
+  </tbody>
+<% end %>
+</table>
+<br>
+<br>
+
+<!--== Rentals Statistics Table End ==-->
+
+
+
+
+</body>
+
+</html>

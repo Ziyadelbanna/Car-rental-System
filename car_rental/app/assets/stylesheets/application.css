@@ -17,4 +17,5 @@
  *= require bootstrap.min
  *= require font-awesome
  *= require_self
+ *= require social-share-button
  */

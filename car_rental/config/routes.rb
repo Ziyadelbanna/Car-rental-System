@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
 
 
+  resources :total_rentals
+  get 'manage_statistics/total_stat'
+  get 'manage_statistics/car_stat'
   root 'welcome#home'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'

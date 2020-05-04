@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+
+<head>
+  <title>Catalogue</title>
+</head>
+
+<body class="loader-active">
+
+<!--== Page Title Area Start ==-->
+<section id="page-title-area" class="section-padding overlay">
+  <div class="container">
+    <div class="row">
+      <!-- Page Title Start -->
+      <div class="col-lg-12">
+        <div class="section-title  text-center">
+          <h2>Cars Statistics</h2>
+          <span class="title-line"><i class="fa fa-car"></i></span>
+          <p>We are here for you.</p>
+        </div>
+      </div>
+      <!-- Page Title End -->
+    </div>
+  </div>
+</section>
+<!--== Page Title Area End ==-->
+
+<!--== Statistics Table Start ==-->
+<br>
+<h1>General Statistics</h1>
+<br>
+<table class="table">
+
+  <thead>
+    <tr>
+      <th scope="col">Car Model</th>
+      <th scope="col">Rentals</th>
+      <th scope="col">Rent Days</th>
+      <th scope="col">Total Income</th>
+      <th scope="col">Customers</th>
+      <th scope="col">Average Age</th>
+      <th scope="col">Rentals share</th>
+  </tr>
+  </thead>
+
+<% (0 .. @car_models.length-1).each do |i|  %>
+  <tbody>
+    <tr>
+      <th scope="row"><%= link_to("#{@car_models[i].model}", {:action=>"car_stat",:id=> @car_models[i].id}) %></th>
+      <td><%= @num_of_rents[i] %></td>
+      <td><%= @num_of_rent_days[i] == nil ? "--" : @num_of_rent_days[i] %></td>
+      <td><%= @total_car_income[i] %></td>
+      <td><%= @num_of_customers[i] %></td>
+      <td><%= @average_age[i] == nil ? "--" : @average_age[i] %></td>
+      <td><%= '%.2f' % @income_share[i] %></td>
+    </tr>
+  </tbody>
+<% end %>
+<!--== Statistics Table End ==-->
+</table>
+
+
+
+
+</body>
+
+</html>

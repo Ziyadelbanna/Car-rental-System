@@ -28,3 +28,4 @@
 //= require plugins/slicknav.min
 //= require plugins/vegas.min
 //= require plugins/waypoints.min
+//= require social-share-button

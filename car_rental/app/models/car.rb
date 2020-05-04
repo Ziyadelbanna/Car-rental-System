@@ -2,6 +2,7 @@ class Car < ApplicationRecord
 	# has_many :rentals, dependent: :destroy
 	has_many :reviews, dependent: :destroy
 	has_many :rented_cars, dependent: :destroy
+	has_many :total_rentals
 	has_one_attached :image
 
 	#has_many :users, through: :rented_cars
