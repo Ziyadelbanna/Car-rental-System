@@ -63,9 +63,6 @@ ActiveRecord::Schema.define(version: 2020_05_03_215339) do
     t.float "cost", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "userCardNo"
-    t.date "cardExpiredDate"
-    t.integer "cardCVC"
     t.index ["car_id"], name: "index_rentals_on_car_id"
     t.index ["user_id"], name: "index_rentals_on_user_id"
   end
@@ -118,15 +115,6 @@ ActiveRecord::Schema.define(version: 2020_05_03_215339) do
     t.index ["user_id"], name: "index_total_rentals_on_user_id"
   end
 
-  create_table "user_cars", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "car_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["car_id"], name: "index_user_cars_on_car_id"
-    t.index ["user_id"], name: "index_user_cars_on_user_id"
-  end
-
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=latin1", force: :cascade do |t|
     t.string "user_name", limit: 25, null: false
     t.string "password_digest", null: false
@@ -148,6 +136,4 @@ ActiveRecord::Schema.define(version: 2020_05_03_215339) do
   add_foreign_key "rentals", "users"
   add_foreign_key "reviews", "cars"
   add_foreign_key "reviews", "users"
-  add_foreign_key "user_cars", "cars"
-  add_foreign_key "user_cars", "users"
 end

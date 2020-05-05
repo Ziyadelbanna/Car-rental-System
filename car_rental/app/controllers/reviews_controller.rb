@@ -21,6 +21,9 @@ class ReviewsController < ApplicationController
   def edit
   end
 
+  def show
+  end
+
   # POST /reviews
   # POST /reviews.json
   def create
@@ -29,7 +32,7 @@ class ReviewsController < ApplicationController
     @review.car_id = @car.id
 
     if @review.save
-      redirect_to @car
+      redirect_to root_url
     else
       render 'new'
     end
@@ -74,7 +77,7 @@ class ReviewsController < ApplicationController
   end
 
     # Only allow a list of trusted parameters through.
-    def review_params
-      params.require(:review).permit( :rank, :content)
+   def review_params
+       params.require(:review).permit( :rank, :content)
     end
 end

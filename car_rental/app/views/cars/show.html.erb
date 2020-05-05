@@ -84,42 +84,42 @@
               </div>
             </div>
 
+
+            <h4>All reviews</h4>
+            <% i = 0 %>
+            <% while i < @reviews.length %>
+
+              <ul class="recent-tips">
+                <li class="single-recent-tips">
+                  <div class="recent-tip-body">
+                    <%= hidden_field_tag @user=User.where("id = ?",@reviews[i].user_id) %>
+                    <h5> "<%= @reviews[i].content %>" </h5>
+                   ~User-id: <%= @reviews[i].user_id %>
+                   ~Rank: <%= @reviews[i].rank %>
+                  </div>
+                </li>
+              </ul>
+              <% i += 1 %>
+            <% end %>
+
             <div class="review-area">
-              <h3>Be the first to review “<%= @car.model %>”</h3>
-              <div class="review-star">
-                <p class="rating">
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star"></i>
-                  <i class="fa fa-star unmark"></i>
-                  <i class="fa fa-star unmark"></i>
-                </p>
-              </div>
+              <h4>Be the first to review “<%= @car.model %>”</h4>
               <div class="review-form">
-                <form action="index.html">
-                  <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                      <div class="name-input">
-                        <input type="text" placeholder="Full Name">
+                    <%= form_for([@car], url:"/review", html: {method: "post"}) do |form| %>
+                      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                      <%= hidden_field_tag :car_id, @car.id %>
+                      <div class="row">
+                        <div class="field">
+                          <%= form.label :rank %>
+                          <div id="star-rating">
+                          </div>
+                        </div>
                       </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6">
-                      <div class="email-input">
-                        <input type="email" placeholder="Email Address">
+                      <div class="input-submit">
+                        <button type="submit">Complete review</button>
+                        <button type="reset">Clear</button>
                       </div>
-                    </div>
-                  </div>
-
-                  <div class="message-input">
-                    <textarea name="review" cols="30" rows="5" placeholder="Write Your Feedback Here!"></textarea>
-                  </div>
-
-                  <div class="input-submit">
-                    <button type="submit">Submit</button>
-                    <button type="reset">Clear</button>
-                  </div>
-                </form>
+                    <% end %>
               </div>
             </div>
           </div>
@@ -210,7 +210,13 @@
   </div>
 </section>
 <!--== Car List Area End ==-->
-
+<script>
+    $('#star-rating').raty({
+        path: '/assets/',
+        hints: ['bad', 'poor', 'regular', 'good', 'gorgeous'],
+        scoreName: 'review[rank]'
+    });
+</script>
 
 </body>
 
