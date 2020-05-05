@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
-<body class="loader-active">
+<body onload='hideit()' class="loader-active">
 <p id="notice"><%= notice %></p>
 
 <!--== Page Title Area Start ==-->
@@ -88,11 +88,9 @@
             <h4>All reviews</h4>
             <% i = 0 %>
             <% while i < @reviews.length %>
-
               <ul class="recent-tips">
                 <li class="single-recent-tips">
                   <div class="recent-tip-body">
-                    <%= hidden_field_tag @user=User.where("id = ?",@reviews[i].user_id) %>
                     <h5> "<%= @reviews[i].content %>" </h5>
                    ~User-id: <%= @reviews[i].user_id %>
                    ~Rank: <%= @reviews[i].rank %>
@@ -102,7 +100,8 @@
               <% i += 1 %>
             <% end %>
 
-            <div class="review-area">
+
+            <div id="review-area" class="review-area">
               <h4>Be the first to review “<%= @car.model %>”</h4>
               <div class="review-form">
                     <%= form_for([@car], url:"/review", html: {method: "post"}) do |form| %>
@@ -216,6 +215,14 @@
         hints: ['bad', 'poor', 'regular', 'good', 'gorgeous'],
         scoreName: 'review[rank]'
     });
+    function hideit()
+{
+    var yes ="false"
+    if (<%=current_user.nil? %>){
+        document.getElementById("review-area").style.visibility="hidden";
+    }
+
+}
 </script>
 
 </body>
