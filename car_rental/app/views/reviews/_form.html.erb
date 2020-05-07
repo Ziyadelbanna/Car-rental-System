@@ -5,46 +5,24 @@
 <br>
 <br>
 
-<%= form_for([ @car,@review]) do |form| %>
+<%= form_for([@car,@review]) do |form| %>
 
+  <div class="review-area">
+    <h3>Be the first to review “<%= @car.model %>”</h3>
+    <div class="review-form">
+      <div name="rank" id="star-rating" class="review-star">
+      </div>
 
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :car_id %>
-    <%= form.text_field :car_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :rank %>
-    <div id="star-rating">
+      <%= form.text_area(:content, size: '100x10',placeholder:'Write Your Feedback Here!') %>
     </div>
   </div>
-
-  <div class="field">
-    <%= form.label :content%>
-    <%= form.text_area :content %>
-  </div>
-
   <div class="actions">
-      <%= form.submit%>
+    <%= form.submit%>
   </div>
+
+
 <% end %>
 
-
-<!--<script>-->
-<!--    $('.star-rating').raty({-->
-<!--        path: '/assets/',-->
-<!--        click: true,-->
-<!--        hints: ['bad', 'poor', 'regular', 'good', 'gorgeous'],-->
-<!--        score: function() {-->
-<!--            return $(this).attr('data-score');-->
-<!--        }-->
-<!--    });-->
-<!--</script>-->
 
 <script>
     $('#star-rating').raty({
