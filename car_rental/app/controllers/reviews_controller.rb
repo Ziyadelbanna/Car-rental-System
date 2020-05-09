@@ -32,7 +32,7 @@ class ReviewsController < ApplicationController
     @review.car_id = @car.id
 
     if @review.save
-      redirect_to root_url
+      redirect_to @car
     else
       render 'new'
     end
