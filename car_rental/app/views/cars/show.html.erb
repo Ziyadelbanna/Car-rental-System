@@ -110,8 +110,11 @@
                         </div>
 
                     <div class="recent-tip-body">
+                      <div class="star-rating-2" data-score=<%= @reviews[i].rank %>></div>
                       <h5>"<%= @reviews[i].content %>"</h5>
                       <span class="date">February 5, 2018</span>
+                      
+
                     </div>
                   </li>
                     <% i += 1 %>
@@ -119,7 +122,6 @@
                 </ul>
               </div>
             </div>
-
 
 
             <div id="review-area" class="review-area">
@@ -234,7 +236,13 @@
         hints: ['bad', 'poor', 'regular', 'good', 'gorgeous'],
         scoreName: 'review[rank]'
     });
-
+    $('.star-rating-2').raty({
+        path: '/assets/',
+        readOnly: true,
+        score: function () {
+            return $(this).attr('data-score');
+        }
+    });
     function hideit()
 {
     var yes ="false"

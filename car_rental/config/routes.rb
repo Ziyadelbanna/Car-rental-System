@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   post '/review', to: 'reviews#create'
-
+  delete 'delete', to: 'reviews#destroy'
 
   get 'saved', to: 'users#my_saved'
   post 'save_car', to: 'users#add_cars_to_favourite'
@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   get 'rent_car', to: 'users#add_cars_to_rent'
 
   delete 'delete', to: 'rented_cars#admin_destroy'
-
   get 'search', to: 'cars#search'
 
   post 'rented_cars/new'
